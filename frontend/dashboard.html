@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">TaskMaster</div>
+
+            <div class="user-info">
+                <span id="user-greeting">Hello, User</span>
+                <button id="logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-3">
+
+        <!-- Add Task Section -->
+        <section class="task-form-section card glassmorphism">
+            <h2>Add New Task</h2>
+
+            <div id="task-error" class="error-message"></div>
+
+            <form id="task-form">
+                <div class="form-group">
+    <input type="text" id="task-title" required placeholder="Task Title">
+</div>
+
+<div class="form-group">
+    <textarea id="task-desc" placeholder="Task Description (Optional)"></textarea>
+</div>
+
+<button type="submit" class="btn btn-primary btn-block">
+    Add Task
+</button>
+            </form>
+        </section>
+
+        <!-- Controls -->
+        <section class="task-controls mt-2">
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search tasks...">
+            </div>
+
+            <div class="filter-box">
+                <select id="filter-select">
+                    <option value="all">All Tasks</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+        </section>
+
+        <!-- Loading -->
+        <div id="loading" class="loading-spinner hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Task List -->
+        <section class="task-list mt-2" id="tasks-container">
+            <!-- Tasks will come here -->
+        </section>
+
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content card">
+
+            <span class="close-modal">&times;</span>
+
+            <h2>Edit Task</h2>
+
+            <form id="edit-task-form">
+
+                <input type="hidden" id="edit-task-id">
+
+                <div class="form-group">
+                    <label for="edit-task-title">Title</label>
+                    <input type="text" id="edit-task-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-task-desc">Description</label>
+                    <textarea id="edit-task-desc" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-task-status">Status</label>
+                    <select id="edit-task-status">
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Update Task
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="./js/script.js"></script>
+
+</body>
+</html>

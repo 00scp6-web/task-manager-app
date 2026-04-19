@@ -1,0 +1,302 @@
+:root {
+    --primary-color: #4F46E5;
+    --primary-hover: #4338CA;
+    --secondary-color: #1F2937;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+
+    --success: #10B981;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+
+    --border-color: #E5E7EB;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 20px rgba(0,0,0,0.12);
+
+    --radius: 12px;
+    --transition: all 0.25s ease;
+}
+
+/* DARK MODE */
+body.dark {
+    --bg-color: #111827;
+    --card-bg: #1F2937;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --border-color: #374151;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* CARD */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* INPUTS */
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-top: 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79,70,229,0.15);
+    transform: scale(1.01);
+}
+
+/* ================= TASK LIST ================= */
+
+.task-list {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* TASK ITEM */
+.task-item {
+    background: var(--card-bg);
+    padding: 1.4rem;
+    border-radius: var(--radius);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-left: 5px solid var(--warning);
+
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.task-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* hover glow */
+.task-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(79,70,229,0.1), transparent);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.task-item:hover::before {
+    opacity: 1;
+}
+
+/* priority */
+.task-item.high { border-left-color: var(--danger); }
+.task-item.medium { border-left-color: var(--warning); }
+.task-item.low { border-left-color: var(--success); }
+
+/* completed */
+.task-item.completed {
+    opacity: 0.7;
+    border-left-color: var(--success);
+}
+
+.task-item.completed .task-title {
+    text-decoration: line-through;
+}
+
+/* TEXT */
+.task-title {
+    font-weight: 600;
+}
+
+.task-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ================= BUTTONS (BASE) ================= */
+
+.btn {
+    padding: 0.7rem 1.3rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* COLORS */
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+/* ================= TASK ACTION BUTTONS (FIXED PROPERLY) ================= */
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* IMPORTANT FIX: THIS WAS THE MAIN ISSUE */
+.task-actions button {
+    padding: 0.5rem 0.9rem;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    min-width: 80px;
+
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+
+    position: relative; /* FIX */
+    overflow: hidden;   /* FIX */
+}
+
+/* HOVER */
+.task-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* ACTIVE */
+.task-actions button:active {
+    transform: scale(0.95);
+}
+
+/* APPLY COLORS (NO CONFLICT NOW) */
+.task-actions .btn-success {
+    background: #10B981;
+    color: white;
+}
+
+.task-actions .btn-primary {
+    background: #4F46E5;
+    color: white;
+}
+
+.task-actions .btn-danger {
+    background: #EF4444;
+    color: white;
+}
+
+/* TOAST */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
